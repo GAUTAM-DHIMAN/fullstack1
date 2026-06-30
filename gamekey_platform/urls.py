@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 from games.viewsets import GameViewSet, PublisherViewSet
 from games.views import register
 
@@ -29,5 +30,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("api/register/", register),
+    path("api/login/", obtain_auth_token),  # DRF built-in token auth endpoint
 ]
+
 
