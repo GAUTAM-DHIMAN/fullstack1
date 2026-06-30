@@ -143,8 +143,9 @@ STORAGES = {
     },
 }
 
-# CORS: Allow requests from the Angular development server
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-    "http://127.0.0.1:4200",
-]
+# CORS: Allow requests from environment-specified origins or defaults
+CORS_ALLOWED_ORIGINS = config(
+    "CORS_ALLOWED_ORIGINS",
+    default="http://localhost:4200,http://127.0.0.1:4200",
+    cast=lambda v: [s.strip() for s in v.split(",") if s.strip()]
+)
