@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 export interface Game {
   id: number;
@@ -16,7 +17,7 @@ export interface Game {
 })
 export class GameService {
   // URL pointing to the running Django REST API endpoint
-  private apiUrl = 'http://127.0.0.1:8000/api/games/';
+  private apiUrl = `${environment.apiUrl}/games/`;
 
   // Inject HttpClient into the service constructor
   constructor(private http: HttpClient) {}
