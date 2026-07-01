@@ -1,0 +1,39 @@
+<header>
+
+  <h1>🎮 GameKey Store</h1>
+
+  <nav>
+
+    <a
+      routerLink="/games"
+      routerLinkActive="active-link">
+      Game Catalog
+    </a>
+
+    <a
+      routerLink="/games/add"
+      routerLinkActive="active-link">
+      Add Game
+    </a>
+
+    @if (authService.isAuthenticated()) {
+      <button class="nav-btn" (click)="logout()">Logout</button>
+    } @else {
+      <a
+        routerLink="/login"
+        routerLinkActive="active-link">
+        Login
+      </a>
+    }
+
+    <!-- Cart summary using computed signals -->
+    <div class="cart-summary">
+      🛒 Cart: <strong>{{ cartService.totalItems() }}</strong> items
+      (Total: <strong>{{ cartService.totalPrice() | number:'1.2-2' }}</strong>)
+    </div>
+
+  </nav>
+
+</header>
+
+<router-outlet></router-outlet>

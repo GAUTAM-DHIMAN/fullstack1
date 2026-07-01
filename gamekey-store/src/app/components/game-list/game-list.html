@@ -1,0 +1,28 @@
+<div class="container">
+
+  <h2>🎮 Game Catalog</h2>
+
+  @if (games().length === 0) {
+
+    <p class="empty-state">No games available. Check your backend connection.</p>
+
+  } @else {
+
+    <div class="game-grid">
+
+      @for (game of games(); track game.id) {
+
+        <!-- Use GameCard child component with @Input game and @Output events -->
+        <app-game-card
+          [game]="game"
+          (addToCart)="addToCart($event)"
+          (toggleAvailability)="toggleAvailability($event)">
+        </app-game-card>
+
+      }
+
+    </div>
+
+  }
+
+</div>

@@ -3,4 +3,6 @@
 *.pyc
 __pycache__/
 db.sqlite3
-gamekey-store/
+node_modules/
+.angular/
+dist/

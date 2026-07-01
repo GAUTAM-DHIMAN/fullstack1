@@ -1,0 +1,74 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h2>{{ isLoginMode ? '🔐 Sign In' : '📝 Register' }}</h2>
+      <p class="subtitle">{{ isLoginMode ? 'Welcome back to GameKey Store' : 'Create your GameKey account' }}</p>
+    </div>
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" formControlName="username" placeholder="Enter username"
+               class="form-control"
+               [ngClass]="{ 'is-invalid': username?.invalid && username?.touched }" />
+        @if (username?.invalid && username?.touched) {
+          <div class="error-feedback">
+            @if (username?.errors?.['required']) {
+              <small>Username is required.</small>
+            }
+            @if (username?.errors?.['minlength']) {
+              <small>Username must be at least 3 characters.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" placeholder="Enter password"
+               class="form-control"
+               [ngClass]="{ 'is-invalid': password?.invalid && password?.touched }" />
+        @if (password?.invalid && password?.touched) {
+          <div class="error-feedback">
+            @if (password?.errors?.['required']) {
+              <small>Password is required.</small>
+            }
+            @if (password?.errors?.['minlength']) {
+              <small>Password must be at least 4 characters.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Server error message -->
+      @if (errorMessage) {
+        <div class="server-error">
+          <small>⚠️ {{ errorMessage }}</small>
+        </div>
+      }
+
+      <!-- Actions -->
+      <div class="actions">
+        <button type="submit" class="btn-submit" [disabled]="isLoading">
+          @if (isLoading) {
+            <span class="spinner"></span> Processing...
+          } @else {
+            {{ isLoginMode ? 'Sign In' : 'Create Account' }}
+          }
+        </button>
+      </div>
+
+      <!-- Toggle mode -->
+      <div class="toggle-mode">
+        <span>{{ isLoginMode ? "Don't have an account?" : 'Already have an account?' }}</span>
+        <button type="button" class="btn-toggle" (click)="toggleMode()">
+          {{ isLoginMode ? 'Register' : 'Sign In' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

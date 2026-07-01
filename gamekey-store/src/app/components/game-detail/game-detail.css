@@ -1,0 +1,10 @@
+.detail-container{
+    width:600px;
+    margin:auto;
+    padding:20px;
+}
+
+a{
+    text-decoration:none;
+    color:blue;
+}

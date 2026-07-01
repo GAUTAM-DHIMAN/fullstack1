@@ -1,0 +1,51 @@
+<div class="form-container">
+  <h2>➕ Add New Game to Store</h2>
+
+  <!-- Bind form to the TS FormGroup structure -->
+  <form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Title Input Field -->
+    <div class="form-group">
+      <label for="title">Game Title</label>
+      <input id="title" type="text" formControlName="title" placeholder="Enter title" class="form-control"
+             [ngClass]="{ 'is-invalid': title?.invalid && title?.touched }" />
+      
+      <!-- Render validation errors only if the user has touched the field and it has errors -->
+      @if (title?.invalid && title?.touched) {
+        <div class="error-feedback">
+          @if (title?.errors?.['required']) {
+            <small>Title is required.</small>
+          }
+          @if (title?.errors?.['titleLowercase']) {
+            <small>Game title must start with a capitalized letter.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Price Input Field -->
+    <div class="form-group">
+      <label for="price">Price ($)</label>
+      <input id="price" type="number" formControlName="price" placeholder="Enter price" class="form-control"
+             [ngClass]="{ 'is-invalid': price?.invalid && price?.touched }" />
+      
+      @if (price?.invalid && price?.touched) {
+        <div class="error-feedback">
+          @if (price?.errors?.['required']) {
+            <small>Price is required.</small>
+          }
+          @if (price?.errors?.['min']) {
+            <small>Price must be at least $1.00.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button type="submit" class="btn-submit">Add Game</button>
+      <a routerLink="/games" class="btn-cancel">Cancel</a>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,31 @@
+<div class="game-card">
+  <div class="card-header">
+    <h3 class="game-title">{{ game.title }}</h3>
+    @if (game.available !== undefined) {
+      @if (game.available) {
+        <span class="badge badge-stock">✅ In Stock</span>
+      } @else {
+        <span class="badge badge-out">❌ Out of Stock</span>
+      }
+    }
+  </div>
+
+  <div class="card-body">
+    <div class="price-section">
+      <span class="original-price">${{ game.price | number:'1.2-2' }}</span>
+      <span class="discounted-price">
+        Sale: ${{ game.price | discount:15 | number:'1.2-2' }}
+      </span>
+      <span class="discount-badge">-15%</span>
+    </div>
+  </div>
+
+  <div class="card-actions">
+    <!-- Template reference variable #viewLink used to reference the anchor element -->
+    <a #viewLink [routerLink]="['/games', game.id]" class="btn-view">View Details</a>
+    <button (click)="onAddToCart()" class="btn-cart">🛒 Add to Cart</button>
+    @if (game.available !== undefined) {
+      <button (click)="onToggle()" class="btn-toggle">Toggle</button>
+    }
+  </div>
+</div>

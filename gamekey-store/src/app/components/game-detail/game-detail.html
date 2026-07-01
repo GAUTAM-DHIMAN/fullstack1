@@ -1,0 +1,35 @@
+<div class="detail-container">
+
+  @if (game()) {
+
+    <h2>{{game()?.title}}</h2>
+
+    <p><strong>ID:</strong> {{game()?.id}}</p>
+
+    <p><strong>Price:</strong> ${{game()?.price}}</p>
+
+    <p>
+
+      <strong>Status:</strong>
+
+      @if(game()?.available){
+        <span>✅ In Stock</span>
+      } @else {
+        <span>❌ Out of Stock</span>
+      }
+
+    </p>
+
+  } @else {
+
+    <p>Game Not Found</p>
+
+  }
+
+  <br>
+
+  <a routerLink="/games">
+    ← Back to Catalog
+  </a>
+
+</div>
