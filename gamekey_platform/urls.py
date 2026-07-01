@@ -21,12 +21,17 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 from games.viewsets import GameViewSet, PublisherViewSet
 from games.views import register
+from django.http import JsonResponse
+
+def health_check(request):
+    return JsonResponse({"status": "healthy"}, status=200)
 
 router = DefaultRouter()
 router.register(r'games', GameViewSet)
 router.register(r'publishers', PublisherViewSet)
 
 urlpatterns = [
+    path("healthz", health_check),
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
     path("api/register/", register),
